@@ -1,0 +1,82 @@
+version: '3.3'
+volumes:
+  wp-data:
+  html:
+  vhostd:
+networks:
+  wp-back:
+services:
+  db:
+    container_name: mysqldb
+    image: mysql:5.7
+    volumes:
+      - wp-data:/var/lib/mysql
+    environment:
+       MYSQL_ROOT_PASSWORD: rootPassword
+       MYSQL_DATABASE: wordpress
+       MYSQL_USER: wp-user
+       MYSQL_PASSWORD: wp-pass
+    ports:
+      - 8889:3306
+    networks:
+      - wp-back
+
+  nginx-proxy:
+    container_name: nginx_proxy
+    depends_on:
+      - wordpress
+    restart: always
+    image: jwilder/nginx-proxy
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./certificates:/etc/nginx/certs:rw
+      - vhostd:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+
+    labels:
+      - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
+    networks:
+      - wp-back
+
+  letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    restart: always
+    environment:
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+    volumes:
+      - ./certificates:/etc/nginx/certs:rw
+      - vhostd:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - wp-back
+
+  wordpress: 
+    depends_on:
+      - db
+      - redis
+    image: chrisart10/wordprees_secure:1
+    expose:
+      - 80
+      - 443
+    environment:
+       WORDPRESS_DB_HOST: db
+       WORDPRESS_DB_USER: wp-user
+       WORDPRESS_DB_PASSWORD: wp-pass
+       VIRTUAL_HOST: semestral.southcentralus.cloudapp.azure.com 
+       LETSENCRYPT_HOST: semestral.southcentralus.cloudapp.azure.com
+       LETSENCRYPT_EMAIL: christianespinoza@gmail.com
+    volumes:
+      - ./wordpress-files:/var/www/html
+    networks:
+      - wp-back
+
