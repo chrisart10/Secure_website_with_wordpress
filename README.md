@@ -2,7 +2,7 @@
 
 Content:
 
-1. Wordpress (scalable): apache hardening, mod securiry,mod evasive & mod quos.
+1. Wordpress (scalable): apache hardening, mod security,mod evasive & mod quos.
 
 2. Redis
 
