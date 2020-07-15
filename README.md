@@ -4,13 +4,13 @@ Content:
 
 1. Wordpress (scalable):
 
--apache hardening
+1.1 apache hardening
 
--mod securiry
+1.2 mod securiry
 
--mod evasive
+1.3 mod evasive
 
--mod quos
+1.4 mod quos
 
 2. Redis
 
