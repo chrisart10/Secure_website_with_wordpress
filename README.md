@@ -1,4 +1,4 @@
-# compose-wordpress-secure
+# docker-compose and secure wordpress
 
 Content:
 
