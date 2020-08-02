@@ -1,5 +1,3 @@
-# docker-compose and secure wordpress
-
 Content:
 
 *wordpress-file:*
