@@ -2,11 +2,17 @@
 
 Content:
 
-1. Wordpress (scalable): apache hardening, mod security,mod evasive & mod quos.
+*docker-compose.yml:*
 
-2. Redis
+    1. Wordpress (scalable): apache hardening, mod security,mod evasive & mod quos.
 
-3. Mysql
+    2. Redis
 
-4. nginx-proxy
+    3. Mysql
 
+    4. nginx-proxy
+
+*Guide:*
+
+    -Spanish version
+    -English version coming soon...
