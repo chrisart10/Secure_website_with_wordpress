@@ -2,6 +2,12 @@
 
 Content:
 
+*wordpress-file
+
+    -.htaccess
+    -headers.php
+    -wp-config.php
+
 *docker-compose.yml:*
 
     1. Wordpress (scalable): apache hardening, mod security,mod evasive & mod quos.
@@ -16,3 +22,4 @@ Content:
 
     -Spanish version
     -English version coming soon...
+    
