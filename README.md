@@ -2,7 +2,7 @@
 
 Content:
 
-*wordpress-file
+*wordpress-file:*
 
     -.htaccess
     -headers.php
